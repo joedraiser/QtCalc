@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(test)
+project(QtCalc)
 
 set(CMAKE_PREFIX_PATH "C://Qt/5.15.2//mingw81_64//lib//cmake")
 set(CMAKE_CXX_STANDARD 14)
@@ -13,8 +13,8 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(test main.cpp MainWindow.ui callermainwindow.h)
-target_link_libraries(test
+add_executable(QtCalc main.cpp MainWindow.ui callermainwindow.h)
+target_link_libraries(QtCalc
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
