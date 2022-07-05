@@ -25,6 +25,7 @@ public:
     QLineEdit* first_q_line = nullptr;
     QLineEdit* second_q_line = nullptr;
     QLineEdit* current_q_line = nullptr;
+    QLineEdit* operation_line = nullptr;
 
     float makeAddition(float num1, float num2)
     {
@@ -58,6 +59,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc= false;
         }
@@ -69,6 +71,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -80,6 +83,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -91,6 +95,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -102,6 +107,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -113,6 +119,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -124,6 +131,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -135,6 +143,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -146,6 +155,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -157,6 +167,7 @@ public slots:
         {
             first_q_line->setText("");
             second_q_line->setText("");
+            operation_line->setText("");
             result->setText("");
             newCalc=false;
         }
@@ -164,21 +175,23 @@ public slots:
     };
     void makeCalculation()
     {
-        num1=std::stof(first_q_line->text().toStdString());
-        num2=std::stof(second_q_line->text().toStdString());
-        try
-        {
-            num1=(this->*operation)(num1, num2);
-            std::sprintf (resultBuf, "%f", num1);
-            result->setText(resultBuf);
-        }
-        catch(const std::invalid_argument &e)
-        {
-            result->setText("ERROR!");
+        if(second_q_line->text().isEmpty())
+            result->setText(first_q_line->text());
+        else {
+            num1 = std::stof(first_q_line->text().toStdString());
+            num2 = std::stof(second_q_line->text().toStdString());
+            try {
+                num1 = (this->*operation)(num1, num2);
+                std::sprintf(resultBuf, "%f", num1);
+                result->setText(resultBuf);
+            }
+            catch (const std::invalid_argument &e) {
+                result->setText("ERROR!");
 
-            isDot=false;
-            newCalc=true;
-            current_q_line=first_q_line;
+                isDot = false;
+                newCalc = true;
+                current_q_line = first_q_line;
+            }
         }
 
         isDot=false;
@@ -203,24 +216,44 @@ public slots:
         result->setText("");
     };
     void addtion() {
-        current_q_line = second_q_line;
-        isDot = false;
+        operation_line->setText("+");
         CallerMainWindow::operation=&CallerMainWindow::makeAddition;
+
+        if(!first_q_line->text().isEmpty())
+        {
+            current_q_line = second_q_line;
+            isDot = false;
+        }
     };
     void subtraction() {
-        current_q_line = second_q_line;
-        isDot = false;
+        operation_line->setText("-");
         CallerMainWindow::operation=&CallerMainWindow::makeSubtraction;
+
+        if(!first_q_line->text().isEmpty())
+        {
+            current_q_line = second_q_line;
+            isDot = false;
+        }
     };
     void division() {
-        current_q_line = second_q_line;
-        isDot = false;
+        operation_line->setText("/");
         CallerMainWindow::operation=&CallerMainWindow::makeDivision;
+
+        if(!first_q_line->text().isEmpty())
+        {
+            current_q_line = second_q_line;
+            isDot = false;
+        }
     };
     void multiplication() {
-        current_q_line = second_q_line;
-        isDot = false;
+        operation_line->setText("*");
         CallerMainWindow::operation=&CallerMainWindow::makeMultiplication;
+
+        if(!first_q_line->text().isEmpty())
+        {
+            current_q_line = second_q_line;
+            isDot = false;
+        }
     };
 };
 

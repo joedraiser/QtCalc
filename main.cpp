@@ -10,6 +10,7 @@ int main(int argc, char *argv[]) {
     window.first_q_line = caller.Q_LINE_1;
     window.second_q_line = caller.Q_LINE_2;
     window.current_q_line = caller.Q_LINE_1;
+    window.operation_line = caller.OPERATION;
     window.resize(480, 640);
     window.show();
     return QApplication::exec();
