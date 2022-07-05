@@ -176,7 +176,10 @@ public slots:
     void makeCalculation()
     {
         if(second_q_line->text().isEmpty())
+        {
             result->setText(first_q_line->text());
+            return;
+        }
         else {
             num1 = std::stof(first_q_line->text().toStdString());
             num2 = std::stof(second_q_line->text().toStdString());
@@ -219,7 +222,7 @@ public slots:
         operation_line->setText("+");
         CallerMainWindow::operation=&CallerMainWindow::makeAddition;
 
-        if(!first_q_line->text().isEmpty())
+        if(!newCalc)
         {
             current_q_line = second_q_line;
             isDot = false;
@@ -229,7 +232,7 @@ public slots:
         operation_line->setText("-");
         CallerMainWindow::operation=&CallerMainWindow::makeSubtraction;
 
-        if(!first_q_line->text().isEmpty())
+        if(!newCalc)
         {
             current_q_line = second_q_line;
             isDot = false;
@@ -239,7 +242,7 @@ public slots:
         operation_line->setText("/");
         CallerMainWindow::operation=&CallerMainWindow::makeDivision;
 
-        if(!first_q_line->text().isEmpty())
+        if(!newCalc)
         {
             current_q_line = second_q_line;
             isDot = false;
@@ -249,7 +252,7 @@ public slots:
         operation_line->setText("*");
         CallerMainWindow::operation=&CallerMainWindow::makeMultiplication;
 
-        if(!first_q_line->text().isEmpty())
+        if(!newCalc)
         {
             current_q_line = second_q_line;
             isDot = false;
